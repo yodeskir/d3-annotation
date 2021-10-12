@@ -1,5 +1,4 @@
 import { lineBuilder, arcBuilder } from "../Builder"
-import { event } from "d3-selection"
 
 export default ({ subjectData = {}, type = {} }, annotation = {}) => {
   const typeSettings = type.typeSettings && type.typeSettings.subject
@@ -96,7 +95,7 @@ export default ({ subjectData = {}, type = {} }, annotation = {}) => {
   }
 
   if (type.editMode) {
-    const dragBadge = () => {
+    const dragBadge = (event) => {
       subjectData.x =
         event.x < -radius * 2
           ? "left"

@@ -1,19 +1,20 @@
-import babel from 'rollup-plugin-babel';
-import babelrc from 'babelrc-rollup';
+import { babel } from '@rollup/plugin-babel'
+import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from 'rollup-plugin-node-resolve';
 
 let pkg = require('./package.json');
 
 export default {
-  entry: 'index.js',
+  input: 'index.js',
   plugins: [
-    babel(babelrc()),
+    commonjs(),
+    babel(),
     nodeResolve()
   ],
-  targets: [
+  output: [
     {
-      dest: pkg.main,
-      format: 'umd',
+      file: pkg.main,
+      format: 'es',
       moduleName: 'd3',
       sourceMap: true,
       globals: {

@@ -1,5 +1,4 @@
 import { lineBuilder } from '../Builder'
-import { event } from 'd3-selection'
 import { lineSetup } from './type-line'
 import { curveCatmullRom } from 'd3-shape'
 import { pointHandle } from '../Handles'
@@ -18,7 +17,7 @@ export default ({ type, connectorData, subjectType }) => {
     const cHandles = connectorData.points
       .map((c,i) => ({...pointHandle({cx: c[0], cy: c[1]}), index: i}))
 
-    const updatePoint = (index) => {      
+    const updatePoint = (event, index) => {
       connectorData.points[index][0] += event.dx
       connectorData.points[index][1] += event.dy
       type.redrawConnector()

@@ -1,6 +1,5 @@
 import { circleHandles } from "../Handles"
 import { arcBuilder } from "../Builder"
-import { event } from "d3-selection"
 
 export default ({ subjectData, type }) => {
   if (!subjectData.radius && !subjectData.outerRadius) {
@@ -16,7 +15,7 @@ export default ({ subjectData, type }) => {
       padding: subjectData.radiusPadding
     })
 
-    const updateRadius = attr => {
+    const updateRadius = (event, attr) => {
       const r = subjectData[attr] + event.dx * Math.sqrt(2)
       subjectData[attr] = r
       type.redrawSubject()

@@ -1,5 +1,4 @@
 import { lineBuilder } from "../Builder"
-import { event } from "d3-selection"
 
 export default ({ subjectData, type }) => {
   if (!subjectData.width) {
@@ -16,13 +15,13 @@ export default ({ subjectData, type }) => {
   let rect = lineBuilder({ data, className: "subject" })
 
   if (type.editMode) {
-    const updateWidth = () => {
+    const updateWidth = (event) => {
       subjectData.width = event.x
       type.redrawSubject()
       type.redrawConnector()
     }
 
-    const updateHeight = () => {
+    const updateHeight = (event) => {
       subjectData.height = event.y
       type.redrawSubject()
       type.redrawConnector()

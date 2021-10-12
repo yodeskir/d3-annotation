@@ -1,4 +1,4 @@
-import { select, event } from "d3-selection"
+import { select } from "d3-selection"
 import { drag } from "d3-drag"
 import { addHandles } from "./Handles"
 
@@ -343,7 +343,7 @@ export class Type {
     this.redrawNote()
   }
 
-  dragstarted() {
+  dragstarted(event) {
     event.sourceEvent.stopPropagation()
     this.dispatcher &&
       this.dispatcher.call("dragstart", this.a, this.annotation)
@@ -356,14 +356,14 @@ export class Type {
     this.a.selectAll("circle.handle").style("pointer-events", "all")
   }
 
-  dragSubject() {
+  dragSubject(event) {
     const position = this.annotation.position
     position.x += event.dx
     position.y += event.dy
     this.annotation.position = position
   }
 
-  dragNote() {
+  dragNote(event) {
     const offset = this.annotation.offset
     offset.x += event.dx
     offset.y += event.dy

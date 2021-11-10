@@ -22,6 +22,7 @@ import subjectBadge from "./Subject/badge"
 
 export class Type {
   constructor({ a, annotation, editMode, dispatcher, notePadding, accessors }) {
+
     this.a = a
 
     this.note =
@@ -43,6 +44,7 @@ export class Type {
     }
 
     this.annotation = annotation
+
     this.editMode = annotation.editMode || editMode
     this.notePadding = notePadding !== undefined ? notePadding : 3
     this.offsetCornerX = 0
@@ -130,6 +132,9 @@ export class Type {
   }
 
   drawSubject(context = {}) {
+
+
+
     const subjectData = this.annotation.subject
     const type = context.type
     const subjectParams = { type: this, subjectData }
@@ -138,8 +143,7 @@ export class Type {
     if (type === "circle") subject = subjectCircle(subjectParams)
     else if (type === "rect") subject = subjectRect(subjectParams)
     else if (type === "threshold") subject = subjectThreshold(subjectParams)
-    else if (type === "badge")
-      subject = subjectBadge(subjectParams, this.annotation)
+    else if (type === "badge") subject = subjectBadge(subjectParams, this.annotation)
 
     let { components = [], handles = [] } = subject
     components.forEach(c => {
@@ -383,6 +387,7 @@ export const customType = (initialType, typeSettings, init) => {
   return class customType extends initialType {
     constructor(settings) {
       super(settings)
+
       this.typeSettings = typeSettings
 
       if (typeSettings.disable) {
@@ -461,6 +466,7 @@ export class d3NoteText extends Type {
     super(params)
     this.textWrap = params.textWrap || 120
     this.drawText()
+
   }
 
   updateTextWrap(textWrap) {
@@ -471,6 +477,7 @@ export class d3NoteText extends Type {
   //TODO: add update text functionality
 
   drawText() {
+
     if (this.note) {
       newWithClass(this.note, [this.annotation], "g", "annotation-note-content")
 
@@ -539,17 +546,24 @@ export class d3NoteText extends Type {
 
       const bbox = this.getNoteBBox()
 
+      const bgHeight = bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom;
+
+      if (!this.annotation.note.title) {
+        label.attr("y", bgHeight / 2 - bbox.height / 2)
+      }
+
       this.a
         .select("rect.annotation-note-bg")
         .attr("width", bbox.width + bgPaddingFinal.left + bgPaddingFinal.right)
         .attr(
           "height",
-          bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom
+          bgHeight
         )
         .attr("x", bbox.x - bgPaddingFinal.left)
         .attr("y", -bgPaddingFinal.top)
         .attr("fill", "white")
         .attr("fill-opacity", 0)
+        .attr('ry', this.annotation.note.bgRadius ? bgHeight / 2 : 0)
     }
   }
 }

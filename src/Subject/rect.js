@@ -14,6 +14,7 @@ export default ({ subjectData, type }) => {
   const data = [[0, 0], [width, 0], [width, height], [0, height], [0, 0]]
   let rect = lineBuilder({ data, className: "subject" })
 
+
   if (type.editMode) {
     const updateWidth = (event) => {
       subjectData.width = event.x

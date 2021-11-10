@@ -1993,13 +1993,14 @@ var addHandles = function addHandles(_ref5) {
   //give it a group and x,y to draw handles
   //then give it instructions on what the handles change
   var h = group.selectAll("circle.handle").data(handles);
-  h.enter().append("circle").attr("class", "handle").attr("fill", "grey").attr("fill-opacity", 0.1).attr("cursor", "move").attr("stroke-dasharray", 5).attr("stroke", "grey").call(drag().container(select("g.annotations").node()).on("start", function (d) {
-    return d.start && d.start(d);
+  var dragEvent = drag().container(select("g.annotations").node()).on("start", function (d) {
+    return d.subject.start && d.subject.start(d);
   }).on("drag", function (d) {
-    return d.drag && d.drag(d);
+    return d.subject.drag && d.subject.drag(d);
   }).on("end", function (d) {
-    return d.end && d.end(d);
-  }));
+    return d.subject.end && d.subject.end(d);
+  });
+  h.enter().append("circle").attr("class", "handle").attr("fill", "grey").attr("fill-opacity", 0.1).attr("cursor", "move").attr("stroke-dasharray", 5).attr("stroke", "grey").call(dragEvent);
   group.selectAll("circle.handle").attr("cx", function (d) {
     return d.x;
   }).attr("cy", function (d) {
@@ -4050,7 +4051,13 @@ var d3NoteText = /*#__PURE__*/function (_Type) {
         label.attr("y", titleBBox.height * 1.1 || 0);
         label.attr("fill", this.annotation.color);
         var bbox = this.getNoteBBox();
-        this.a.select("rect.annotation-note-bg").attr("width", bbox.width + bgPaddingFinal.left + bgPaddingFinal.right).attr("height", bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom).attr("x", bbox.x - bgPaddingFinal.left).attr("y", -bgPaddingFinal.top).attr("fill", "white").attr("fill-opacity", 0);
+        var bgHeight = bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom;
+
+        if (!this.annotation.note.title) {
+          label.attr("y", bgHeight / 2 - bbox.height / 2);
+        }
+
+        this.a.select("rect.annotation-note-bg").attr("width", bbox.width + bgPaddingFinal.left + bgPaddingFinal.right).attr("height", bgHeight).attr("x", bbox.x - bgPaddingFinal.left).attr("y", -bgPaddingFinal.top).attr("fill", "white").attr("fill-opacity", 0).attr('ry', this.annotation.note.bgRadius ? bgHeight / 2 : 0);
       }
     }
   }]);

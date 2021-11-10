@@ -71,6 +71,12 @@ export const addHandles = ({ group, handles, r = 10 }) => {
   //then give it instructions on what the handles change
   const h = group.selectAll("circle.handle").data(handles)
 
+  const dragEvent = drag()
+    .container(select("g.annotations").node())
+    .on("start", d => d.subject.start && d.subject.start(d))
+    .on("drag", d => d.subject.drag && d.subject.drag(d) )
+    .on("end", d => d.subject.end && d.subject.end(d));
+
   h
     .enter()
     .append("circle")
@@ -80,17 +86,11 @@ export const addHandles = ({ group, handles, r = 10 }) => {
     .attr("cursor", "move")
     .attr("stroke-dasharray", 5)
     .attr("stroke", "grey")
-    .call(
-      drag()
-        .container(select("g.annotations").node())
-        .on("start", d => d.start && d.start(d))
-        .on("drag", d => d.drag && d.drag(d))
-        .on("end", d => d.end && d.end(d))
-    )
+    .call(dragEvent)
 
   group
     .selectAll("circle.handle")
-    .attr("cx", d => d.x)
+    .attr("cx", (d) => d.x)
     .attr("cy", d => d.y)
     .attr("r", d => d.r || r)
     .attr("class", d => `handle ${d.className || ""}`)

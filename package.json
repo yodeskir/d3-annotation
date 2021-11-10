@@ -1,6 +1,6 @@
 {
   "name": "d3-svg-annotation",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "",
   "main": "dist/main.js",
   "module": "dist/main.js",
@@ -44,7 +44,7 @@
   "scripts": {
     "start": "npm run server & npm run watch",
     "server": "http-server",
-    "rollup:web": "rollup -c rollupWeb.config.js && rollup -c rollupWebIndependent.config.js",
+    "rollup:web": "rollup -c rollup.config.js",
     "docs": "node docs/browserify-docs.js && npm run docs-bundle",
     "docs-bundle": "uglifyjs --source-map=docs/bundle.map --source-map-url=bundle.map -- docs/vendor/jquery2.1.1.min.js docs/vendor/materialize.min.js docs/vendor/d3-selection.js  docs/vendor/d3-path.js docs/vendor/d3-shape.js docs/vendor/d3-dispatch.js docs/vendor/d3-drag.js docs/vendor/d3-transition.js d3-annotation.js docs/docs-compiled.js > docs/bundle.js",
     "watch": "npm-watch",
@@ -58,15 +58,7 @@
     "rollup:web": [
       "src/*.js",
       "src/**/*.js"
-    ],
-    "docs": {
-      "patterns": [
-        "docs/docs.js",
-        "d3-annotation.js",
-        "docs/content/*.md"
-      ],
-      "extensions": "js,md"
-    }
+    ]
   },
   "repository": {
     "type": "git",

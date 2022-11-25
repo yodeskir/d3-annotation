@@ -532,9 +532,9 @@ export class d3NoteText extends Type {
 				const title = this.a.select("text.annotation-note-title")
 				title.text(this.annotation.note.title)
 				title.attr("fill", this.annotation.color)
-				title.attr("font-family", this.annotation.fontFamily)
-				title.attr("font-size", this.annotation.fontSize)
-				title.attr("font-weight", "bold")
+				title.style("font-family", this.annotation.fontFamily)
+				title.style("font-size", this.annotation.fontSize)
+				title.style("font-weight", "bold")
 				title.call(wrap, wrapLength, wrapSplitter)
 				titleBBox = title.node().getBBox()
 			}
@@ -544,8 +544,8 @@ export class d3NoteText extends Type {
 
 			label.attr("y", titleBBox.height * 1.1 || 0)
 			label.attr("fill", this.annotation.color)
-			label.attr("font-family", this.annotation.fontFamily)
-			label.attr("font-size", this.annotation.fontSize)
+			label.style("font-family", this.annotation.fontFamily)
+			label.style("font-size", this.annotation.fontSize)
 
 			const bbox = this.getNoteBBox()
 

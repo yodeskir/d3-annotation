@@ -3,5 +3,6 @@
         "typeRoots": ["./types"],
         "allowJs": true
     },
-    "include": ["types/*"]
+    "include": ["types/*"],
+		"scripts": { "build": "tsc" }
 }

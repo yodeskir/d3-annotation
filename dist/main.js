@@ -247,6 +247,10 @@ var Annotation = /*#__PURE__*/function () {
         dx = _ref$dx === void 0 ? 0 : _ref$dx,
         _ref$color = _ref.color,
         color = _ref$color === void 0 ? "grey" : _ref$color,
+        _ref$fontFamily = _ref.fontFamily,
+        fontFamily = _ref$fontFamily === void 0 ? "sans-serif" : _ref$fontFamily,
+        _ref$fontSize = _ref.fontSize,
+        fontSize = _ref$fontSize === void 0 ? "13px" : _ref$fontSize,
         data = _ref.data,
         type = _ref.type,
         subject = _ref.subject,
@@ -265,6 +269,8 @@ var Annotation = /*#__PURE__*/function () {
     this._color = color;
     this.id = id;
     this._className = className || "";
+    this._fontFamily = fontFamily;
+    this._fontSize = fontSize;
     this._type = type || "";
     this.data = data;
     this.note = note || {};
@@ -345,6 +351,24 @@ var Annotation = /*#__PURE__*/function () {
     },
     set: function set(color) {
       this._color = color;
+      this.updatePosition();
+    }
+  }, {
+    key: "fontFamily",
+    get: function get() {
+      return this._fontFamily;
+    },
+    set: function set(fontFamily) {
+      this._fontFamily = fontFamily;
+      this.updatePosition();
+    }
+  }, {
+    key: "fontSize",
+    get: function get() {
+      return this._fontSize;
+    },
+    set: function set(fontSize) {
+      this._fontSize = fontSize;
       this.updatePosition();
     }
   }, {
@@ -4041,7 +4065,9 @@ var d3NoteText = /*#__PURE__*/function (_Type) {
           var title = this.a.select("text.annotation-note-title");
           title.text(this.annotation.note.title);
           title.attr("fill", this.annotation.color);
-          title.attr("font-weight", "bold");
+          title.style("font-family", this.annotation.fontFamily);
+          title.style("font-size", this.annotation.fontSize);
+          title.style("font-weight", "bold");
           title.call(wrap, wrapLength, wrapSplitter);
           titleBBox = title.node().getBBox();
         }
@@ -4050,6 +4076,8 @@ var d3NoteText = /*#__PURE__*/function (_Type) {
         label.call(wrap, wrapLength, wrapSplitter);
         label.attr("y", titleBBox.height * 1.1 || 0);
         label.attr("fill", this.annotation.color);
+        label.style("font-family", this.annotation.fontFamily);
+        label.style("font-size", this.annotation.fontSize);
         var bbox = this.getNoteBBox();
         var bgHeight = bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom;
 

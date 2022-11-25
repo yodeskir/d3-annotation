@@ -545,7 +545,7 @@ export class d3NoteText extends Type {
 			label.attr("y", titleBBox.height * 1.1 || 0)
 			label.attr("fill", this.annotation.color)
 			label.style("font-family", this.annotation.fontFamily)
-			label.style("font-size", this.annotation.fontSize)
+			label.style("font-size", `${this.annotation.fontSize}px`)
 
 			const bbox = this.getNoteBBox()
 

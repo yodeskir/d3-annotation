@@ -4077,7 +4077,7 @@ var d3NoteText = /*#__PURE__*/function (_Type) {
         label.attr("y", titleBBox.height * 1.1 || 0);
         label.attr("fill", this.annotation.color);
         label.style("font-family", this.annotation.fontFamily);
-        label.style("font-size", this.annotation.fontSize);
+        label.style("font-size", "".concat(this.annotation.fontSize, "px"));
         var bbox = this.getNoteBBox();
         var bgHeight = bbox.height + bgPaddingFinal.top + bgPaddingFinal.bottom;
 

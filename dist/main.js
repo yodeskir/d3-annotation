@@ -4324,6 +4324,7 @@ function annotation() {
     annotation.each(function (d) {
       var a = select(this);
       a.attr("class", "annotation");
+      a.attr("id", d.id);
       newWithClass(a, [d], "g", "annotation-connector");
       newWithClass(a, [d], "g", "annotation-subject");
       newWithClass(a, [d], "g", "annotation-note");

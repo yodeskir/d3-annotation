@@ -1,5 +1,5 @@
 {
-  "name": "d3-svg-annotation",
+  "name": "@visualis/d3-svg-annotation",
   "version": "2.5.3",
   "description": "",
   "main": "dist/main.js",
@@ -50,7 +50,8 @@
     "uglify": "uglifyjs d3-annotation.js -o d3-annotation.min.js -c -m",
     "uglify:independent": "uglifyjs d3-annotation.independent.js -o d3-annotation.independent.min.js -c -m",
     "test": "jest --watch",
-    "test:only": "jest"
+    "test:only": "jest",
+		"deploy": "npx google-artifactregistry-auth && npm publish"
   },
   "watch": {
     "rollup:web": [

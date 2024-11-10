@@ -34,6 +34,9 @@
     "markedify": "0.0.2",
     "npm-prepare-dist": "^0.4.1",
     "npm-watch": "0.1.6",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "reify": "0.4.16",
     "rollup": "^2.58.0",
     "rollup-plugin-babel": "^4.4.0",
@@ -51,7 +54,7 @@
     "uglify:independent": "uglifyjs d3-annotation.independent.js -o d3-annotation.independent.min.js -c -m",
     "test": "jest --watch",
     "test:only": "jest",
-		"deploy": "npx google-artifactregistry-auth && npm publish"
+    "deploy": "npx google-artifactregistry-auth && npm publish"
   },
   "watch": {
     "rollup:web": [
